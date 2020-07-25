@@ -4,6 +4,22 @@ const {Thoughts, Users} = require('../models');
 // Set up Thoughts Controller
 const thoughtsController = {
 
+    // Create a new thought
+    createThoughts({params, body}, res) {
+        Thoughts.create(body)
+        .then(({_id}) => {
+            return Users.findOneAndUpdate({ _id: params.userId}, {$push: {thoughts: _id}}, {new: true});
+        })
+        .then(dbThoughtsData => {
+            if(!dbThoughtsData) {
+                res.status(404).json({message: 'No thoughts with this particular ID!'});
+                return;
+            }
+            res.json(dbThoughtsData)
+        })
+        .catch(err => res.json(err)); 
+    },
+
     // Get all available Thoughts
     getAllThoughts(req,res) {
         Thoughts.find({})
@@ -31,24 +47,8 @@ const thoughtsController = {
         })
         .catch(err => {
             console.log(err);
-            res.status(400).json(err)
+            res.sendStatus(400);
         });
-    },
-
-    // Create a new thought
-    createThoughts({params, body}, res) {
-        Thoughts.create(body)
-        .then(({_id}) => {
-            return Users.findOneAndUpdate({ _id: params.userId}, {$push: {thoughts: _id}}, {new: true});
-        })
-        .then(dbThoughtsData => {
-            if(!dbThoughtsData) {
-                res.status(404).json({message: 'No thoughts with this particular ID!'});
-                return;
-            }
-            res.json(dbThoughtsData)
-        })
-        .catch(err => res.json(err)); 
     },
 
     // Update a current thought by ID
@@ -63,7 +63,7 @@ const thoughtsController = {
             }
                 res.json(dbThoughtsData);
         })
-        .catch(err => res.status(400).json(err));
+        .catch(err => res.json(err));
     },
 
     // Delete a current thought by ID

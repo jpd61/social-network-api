@@ -4,6 +4,13 @@ const {Users} = require('../models');
 // Set up Users Controller
 const usersController = {
     
+    // Create a new User
+    createUsers({body}, res) {
+        Users.create(body)
+        .then(dbUsersData => res.json(dbUsersData))
+        .catch(err => res.status(400).json(err));
+    },
+
     // Get All Users
     getAllUsers(req, res) {
         Users.find({})
@@ -12,7 +19,7 @@ const usersController = {
         // populate user friends
         .populate({path: 'friends', select: '-__v'})
         .select('-__v')
-        .sort({_id: -1})
+        // .sort({_id: -1})
         .then(dbUsersData => res.json(dbUsersData))
         .catch(err => {
             console.log(err);
@@ -40,13 +47,6 @@ const usersController = {
         })
     },
 
-    // Create a new User
-    createUsers({body}, res) {
-        Users.create(body)
-        .then(dbUsersData => res.json(dbUsersData))
-        .catch(err => res.status(400).json(err));
-    },
-
     // Update a current User by ID
     updateUsers({params, body}, res) {
         Users.findOneAndUpdate({_id: params.id}, body, {new: true, runValidators: true})
@@ -57,7 +57,7 @@ const usersController = {
             }
             res.json(dbUserData);
         })
-        .catch(err => res.status(400).json(err))
+        .catch(err => res.json(err))
     },
 
     deleteUsers({params}, res) {
