@@ -1,4 +1,4 @@
-# Social Networking API 👋</h1>
+<h1 align="center"> Social Networking API 👋</h1>
   
 <p align="center">
     <img src="https://img.shields.io/github/repo-size/jpd61/social-network-api" />
@@ -51,16 +51,15 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 ```
    
 ## Table of Contents
-- [Social Networking API 👋</h1>](#social-networking-api-h1)
-  - [Description](#description)
-  - [User Story](#user-story)
-  - [Acceptance Criteria](#acceptance-criteria)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Testing](#testing)
-  - [Contributing](#contributing)
-  - [Questions](#questions)
+- [Description](#description)
+- [User Story](#user-story)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [Questions](#questions)
 
 ## Installation
 💾   
